@@ -1,0 +1,8 @@
+{
+  "short_name": "GitHub Repos App",
+  "name": "GitHub Repos App",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
