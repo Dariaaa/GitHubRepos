@@ -13,15 +13,13 @@ export default class GitHubRepos extends React.Component {
     getAllRepoViews = (user, repoInfo) => {
 
         return AXIOS(`/repos/${user}/${repoInfo.name}/traffic/views`).then(({count, uniques}) => ({
-            "id":repoInfo.id,
-            "name":repoInfo.name,
+            "id": repoInfo.id,
+            "name": repoInfo.name,
             count,
             uniques,
             "created_at": DateUtil.formatDate(repoInfo.created_at)
         }))
     }
-
-
 
 
     getRepoList = (user) => (
@@ -51,26 +49,27 @@ export default class GitHubRepos extends React.Component {
     renderRepos() {
         return (
             <>
-                <div className="repo repo-title">
-                    <tr>
+                <div className="repo">
+                    <tr className="repo-title">
                         <td className="number">№</td>
                         <td className="name">Repo name</td>
                         <td className="date">Created at</td>
                         <td className="number">Views</td>
                         <td className="number">Unique views</td>
                     </tr>
+
+                    {
+                        this.state.repos.map((repo, index) =>
+
+                            <tr>
+                                <td className="number">{index + 1}</td>
+                                <td className="name">{repo.name}</td>
+                                <td className="date">{repo.created_at}</td>
+                                <td className="number">{repo.count}</td>
+                                <td className="number">{repo.uniques}</td>
+                            </tr>
+                        )}
                 </div>
-            {this.state.repos.map((repo, index) =>
-                <div key={repo.id} className="repo">
-                    <tr>
-                        <td className="number">{index + 1}</td>
-                        <td className="name">{repo.name}</td>
-                        <td className="date">{repo.created_at}</td>
-                        <td className="number">{repo.count}</td>
-                        <td className="number">{repo.uniques}</td>
-                    </tr>
-                </div>
-            )}
             </>
         )
     }
